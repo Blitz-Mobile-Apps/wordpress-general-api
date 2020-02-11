@@ -98,6 +98,19 @@ POST: http://localhost/Plugin_api/wp-json/api/v1/get_shipping_method_by_country
 
 ```
 
+## Get all contries
+
+```
+GET: http://localhost/Plugin_api/wp-json/api/v1/get_all_contries
+
+```
+
+## Get product by id
+
+```
+GET: http://localhost/Plugin_api/wp-json/api/v1/get_product_by_id/{product_id}
+
+```
 
 
 
