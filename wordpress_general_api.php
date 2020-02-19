@@ -12,6 +12,7 @@ License:     GPL2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: GAPI
 Author URI: #
+Woo: 12345:342928dfsfhsf8429842374wdf4234sfd
 */
 /*
 Copyright (C) Year  Author  Email : charlestsmith888@gmail.com
@@ -30,6 +31,16 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 define('GAPI_PATH', dirname(__FILE__));
 $plugin = plugin_basename(__FILE__);
 define('GAPI_URL', plugin_dir_url($plugin));
+
+
+register_activation_hook( __FILE__, 'child_plugin_activate' );
+function child_plugin_activate(){
+    // Require parent plugin
+    if ( ! is_plugin_active( 'woocommerce/woocommerce.php' ) and current_user_can( 'activate_plugins' ) ) {
+        // Stop activation redirect and show error
+        wp_die('Sorry, but this plugin requires the Parent Plugin to be installed and active. <br><a href="' . admin_url( 'plugins.php' ) . '">&laquo; Return to Plugins</a>');
+    }
+}
 
 
 require GAPI_PATH.'/inc/GAPI_main_class.php';
