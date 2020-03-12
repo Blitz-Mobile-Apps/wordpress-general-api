@@ -9,23 +9,24 @@ if (!empty($_POST)) {
   if (!empty($_POST['appdata']['homebanner']['image'])) {
     $i = 0;
     foreach ($_POST['appdata']['homebanner']['image'] as $key => $value) {
-      $data['banners'][$i]['image'] = $_POST['appdata']['homebanner']['image'][$key];
-      $data['banners'][$i]['category'] = $_POST['appdata']['homebanner']['category'][$key];
-      $data['banners'][$i]['button'] = $_POST['appdata']['homebanner']['button'][$key];
+      $data['banners'][$i]['image'] = sanitize_text_field($_POST['appdata']['homebanner']['image'][$key]);
+      $data['banners'][$i]['category'] = sanitize_text_field($_POST['appdata']['homebanner']['category'][$key]);
+      $data['banners'][$i]['button'] = sanitize_text_field($_POST['appdata']['homebanner']['button'][$key]);
       $i++;
     }
   }
   if (!empty($_POST['appdata']['pages']['page_name'])) {
     $i = 0;
     foreach ($_POST['appdata']['pages']['page_name'] as $key1 => $value1) {
-      $data['pages'][$value1]['image'] = $_POST['appdata']['pages']['image'][$key1];
-      $data['pages'][$value1]['title'] = $_POST['appdata']['pages']['title'][$key1];
-      $data['pages'][$value1]['content'] = $_POST['appdata']['pages']['content'][$key1];
+      $data['pages'][$value1]['image'] = sanitize_text_field($_POST['appdata']['pages']['image'][$key1]);
+      $data['pages'][$value1]['title'] = sanitize_text_field($_POST['appdata']['pages']['title'][$key1]);
+      $data['pages'][$value1]['content'] = sanitize_textarea_field($_POST['appdata']['pages']['content'][$key1]);
       $i++;
     }
   }
   $data = json_encode($data);
-	update_option('GAPI_app_data', $data);
+  update_option('GAPI_app_data', $data);
+    echo '<div class="notice notice-success is-dismissible"><p>Record Updated!</p></div>';
 }
 
 $getdata = get_option('GAPI_app_data');
